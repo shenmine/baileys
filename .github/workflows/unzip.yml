@@ -1,0 +1,26 @@
+name: Auto Extract ZIP
+
+on: [push]
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Extract ZIP
+        run: |
+          for file in *.zip; do
+            unzip -o "$file" -d extracted
+          done
+
+      - name: Commit results
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add .
+          git commit -m "Auto extract zip" || echo "No changes"
+          git push
