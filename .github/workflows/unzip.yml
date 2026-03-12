@@ -1,4 +1,4 @@
-name: Auto Extract ZIP (No Folder)
+name: Auto Extract ZIP
 
 on: [push]
 
